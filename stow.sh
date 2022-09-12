@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
-stow --adopt *
+stow --adopt bash
+stow --adopt git
 git restore .
