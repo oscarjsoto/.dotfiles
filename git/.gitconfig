@@ -1,0 +1,9 @@
+[user]
+	email = oscar.j.soto12@gmail.com
+	name = Oscar Soto
+[color]
+	ui = auto
+[core]
+	editor = nano -w
+[init]
+	defaultBranch = main
