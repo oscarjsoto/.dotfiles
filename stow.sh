@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
-stow --adopt bash
-stow --adopt git
+stow --adopt bash git zsh
+
 git restore .
+stow bash git zsh
