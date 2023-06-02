@@ -3,4 +3,4 @@
 stow --adopt bash git zsh
 
 git restore .
-stow bash git zsh
+stow bash git
