@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-stow --adopt bash git tmux
-stow --adopt -t /root/ rootBash --ignore=ERR*
+stow --adopt bash git tmux bin
 git restore .
-stow bash git tmux
-stow rootBash -t /root/ --ignore=ERR*
+stow bash git tmux bin
