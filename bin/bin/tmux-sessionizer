@@ -13,4 +13,3 @@ if [ -n "$TMUX" ]; then
 else
     tmux attach-session -t "$session_name"
 fi
-
