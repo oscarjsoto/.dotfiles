@@ -131,3 +131,5 @@ sudo() {
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
 bind -x '"\C-f":"tmux-sessionizer"'
+
+alias vim='nvim'
