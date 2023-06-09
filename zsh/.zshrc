@@ -10,7 +10,7 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-# Add scripts to path
+# Add global scripts to path
 export PATH="$HOME/bin:$PATH"
 
 
@@ -80,9 +80,12 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
+
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
 
 # User configuration
 
@@ -113,7 +116,7 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
+# Nala override
 apt() { 
   command nala "$@"
 }
@@ -126,10 +129,9 @@ sudo() {
   fi
 }
 
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-
+# Shortcut Keys
 bindkey -s "^f" "tmux-sessionizer^M"
-
 alias vim='nvim'
 
+# Add terminal color
 export TERM=xterm-256color
