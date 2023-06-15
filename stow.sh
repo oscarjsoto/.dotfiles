@@ -2,6 +2,6 @@
 
 CONFIGS = "profile git tmux scripts nvim zsh"
 
-stow --adopt "$CONFIGS"
+stow --adopt $CONFIGS
 git restore .
-stow bash "$CONFIGS"
+stow bash $CONFIGS
