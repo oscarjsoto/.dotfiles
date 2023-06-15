@@ -132,6 +132,7 @@ sudo() {
 # Shortcut Keys
 bindkey -s "^f" "tmux-sessionizer^M"
 alias vim='nvim'
+alias gcc='gcc -ansi -Wall -g -O0 -Wwrite-strings -Wshadow -pedantic-errors -fstack-protector-all -Wextra'
 
 # Add terminal color
 export TERM=xterm-256color
