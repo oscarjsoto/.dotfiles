@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-stow --adopt bash git tmux bin nvim zsh
+CONFIGS = "profile git tmux scripts nvim zsh"
+
+stow --adopt "$CONFIGS"
 git restore .
-stow bash git tmux bin nvim zsh
+stow bash "$CONFIGS"
