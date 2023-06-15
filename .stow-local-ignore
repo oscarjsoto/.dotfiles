@@ -3,4 +3,4 @@ misc
 #LICENSE
 ^/.*\.org
 
-bash
+\bash

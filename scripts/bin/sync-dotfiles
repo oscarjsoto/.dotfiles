@@ -18,6 +18,7 @@ if [ "$stash_result" = "No local changes to save" ]; then
 fi
 
 stow --adopt */
+git restore .
 
 echo -e "${BLUE}Pulling updates from dotfiles repo...${NC}"
 echo
