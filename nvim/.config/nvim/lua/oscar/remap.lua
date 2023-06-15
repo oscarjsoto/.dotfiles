@@ -9,4 +9,3 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 
 -- Disable Q in normal mode
 vim.keymap.set("n", "Q", "<nop>")
-
