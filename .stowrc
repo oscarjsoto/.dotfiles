@@ -8,6 +8,7 @@
 
 # Exclude certain files or directories from being symlinked
 --ignore .bashrc
+--ignore .profile
 
 # Specify additional options for stow
 --verbose 2
