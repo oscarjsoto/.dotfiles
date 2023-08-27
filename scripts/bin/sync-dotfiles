@@ -17,7 +17,7 @@ if [ "$stash_result" = "No local changes to save" ]; then
     needs_pop=0
 fi
 
-stow --adopt */
+stow --adopt git nvim profile scripts tmux zsh
 git restore .
 
 echo -e "${BLUE}Pulling updates from dotfiles repo...${NC}"
