@@ -1,1 +1,3 @@
-sudo apt install -y git stow fzf tmux man-db xclip curl htop
+sudo apt install -y git stow fzf tmux man-db xclip curl htop sh
+
+curl -sS https://starship.rs/install.sh | sh
