@@ -17,7 +17,7 @@ if [ "$stash_result" = "No local changes to save" ]; then
     needs_pop=0
 fi
 
-stow --adopt git nvim profile scripts tmux zsh
+stow --adopt git nvim scripts tmux zsh starship
 git restore .
 
 echo -e "${BLUE}Pulling updates from dotfiles repo...${NC}"
@@ -38,5 +38,5 @@ if [ ! -z $unmerged_files ]; then
    printf %"s\n" $unmerged_files  # Ensure newlines are printed
 else
    # Run stow to ensure all new dotfiles are linked
-   stow git nvim scripts tmux bash
+   stow git nvim scripts tmux bash starship
 fi
