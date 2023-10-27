@@ -29,3 +29,8 @@ fi
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
+
+if command -v ocaml &> /dev/null; then
+    eval `opam config env`
+    . "$HOME/.cargo/env"
+fi
