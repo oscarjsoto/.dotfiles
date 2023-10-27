@@ -8,6 +8,19 @@ case $- in
       *) return;;
 esac
 
+
+# Check if the .cache folder exists in the home directory
+# If it doesn't exist, create the .cache folder
+if [ ! -d "$HOME/.cache" ]; then
+    mkdir -p "$HOME/.cache"
+    if [ ! -d "$HOME/.cache/bash" ]; then
+        mkdir -p "$HOME/.cache/bash"
+    fi
+fi
+
+HISTFILE="$HOME/.cache/bash/bash_history"
+LESSHISTFILE="$HOME/.cache/lesshst"
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -143,3 +156,8 @@ source /usr/share/doc/fzf/examples/key-bindings.bash
 bind -x '"\C-f":"tmux-sessionizer"'
 
 alias vim='nvim'
+
+bind '"\e[A":history-search-backward'
+bind '"\e[B":history-search-forward'
+bind '"\e[1;5C":forward-word'
+bind '"\e[1;5D":backward-word'
