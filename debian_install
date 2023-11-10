@@ -1,3 +1,7 @@
+mkdir -p "$HOME/.local/share/nano"
+mkdir -p "$HOME/.cache/history"
+
 sudo apt install -y git stow fzf tmux man-db xclip curl htop nala
 
 curl -sS https://starship.rs/install.sh | sh
+
