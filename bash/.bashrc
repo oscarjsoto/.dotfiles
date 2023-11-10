@@ -10,12 +10,8 @@ esac
 
 
 # Ensure certain folders exists in home directory
-if [ ! -d "$HOME/.cache" ]; then
-    mkdir -p "$HOME/.cache"
-    if [ ! -d "$HOME/.cache/bash" ]; then
-        mkdir -p "$HOME/.cache/bash"
-    fi
-fi
+mkdir -p "$HOME/.local/share/nano"
+mkdir -p "$HOME/.cache/bash"
 
 
 # History Setting
@@ -111,7 +107,7 @@ if ! shopt -oq posix; then
 fi
 
 bind 'set completion-ignore-case on'
-bind 'set show-all-if-ambiguous on'
+bind 'set show-all-if-ambiguous off'
 
 
 # Override apt with nala
