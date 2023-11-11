@@ -1,88 +1,40 @@
-# Bash Settings for Non-login Shells
+# ===============================================
+#     Bash Settings for Non-login Shells
+# ===============================================
 
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# If not running interactively then do nothing
+case $- in *i*) ;; *) return;; esac
 
-
-# Ensure certain folders exists in home directory
+# Ensure system folders
 mkdir -p "$HOME/.local/share/nano"
 mkdir -p "$HOME/.cache/bash"
 
-
-# History Setting
+# Bash History Setting
 HISTFILE="$HOME/.cache/bash/bash_history"
 HISTCONTROL=ignoreboth # don't put duplicate lines or lines starting
 HISTSIZE=1000
 HISTFILESIZE=2000
 shopt -s histappend    # append to the history file
 
-LESSHISTFILE="$HOME/.cache/lesshst"
-
-
 # Allow dynamic window resize
 shopt -s checkwinsize
 
-# Make less more friendly for non-text input files
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# Set terminal prompt color and text
+export TERM=xterm-256color
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-
-# Enable color for ls and grep
+# Enable color command prompts
 if [ -x /usr/bin/dircolors ]; then
+    # Complie Colors
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+
+    # Add Colors
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
-
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
 
 # Auto completion
 if ! shopt -oq posix; then
@@ -96,11 +48,26 @@ fi
 bind 'set completion-ignore-case on'
 bind 'set show-all-if-ambiguous off'
 
+# Fzf enabled
+source /usr/share/doc/fzf/examples/key-bindings.bash
 
-# Override apt with nala
+
+# ===============================================
+#     Less Settings
+# ===============================================
+
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)" # Better non-text input files
+LESSHISTFILE="$HOME/.cache/lesshst"
+
+
+# ===============================================
+#     Nala Settings
+# ===============================================
+
 apt() {
   command nala "$@"
 }
+
 sudo() {
   if [ "$1" = "apt" ]; then
     shift
@@ -114,34 +81,41 @@ sudo() {
 }
 
 
-# Fzf enabled
-source /usr/share/doc/fzf/examples/key-bindings.bash
+# ===============================================
+#     Alias definitions.
+# ===============================================
 
-
-# Alias definitions.
 alias ls='ls -la --color=auto'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias cp='cp -i'
 alias vim='nvim'
-alias nano='nano -lx'
 
-# Keybindings
+
+# ===============================================
+#     Keybindings
+# ===============================================
+
 bind 'TAB:menu-complete' # Tab
 bind '"\e[Z":menu-complete-backward' # Shift tab
-
 bind '"\e[A":history-search-backward' # Up arrow
 bind '"\e[B":history-search-forward' # Down arrow
-
 bind '"\e[1;5C":forward-word' # Ctrl right arrow
 bind '"\e[1;5D":backward-word' # Ctrl left arrow
-
 bind -x '"\C-f":"tmux-sessionizer"' # Ctrl F
 
-# Starship
-# eval "$(starship init bash)"
 
-# Ocaml
+# ===============================================
+#     Starship Settings
+# ===============================================
+
+eval "$(starship init bash)"
+
+
+# ===============================================
+#     Ocaml Settings
+# ===============================================
+
 if command -v ocaml &> /dev/null; then
     . "$HOME/.cargo/env"
     export PATH="/home/osoto/.cargo/bin:/home/osoto/.opam/default/bin:/home/osoto/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/xpressmp/bin:/mnt/c/xpressmp/workbench:/mnt/c/Python311/Scripts/:/mnt/c/Python311/:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/MATLAB/R2022b/bin:/mnt/c/Program Files/starship/bin/:/mnt/c/Users/osoto/AppData/Roaming/nvm:/mnt/c/Program Files/nodejs:/mnt/c/texlive/2023/bin/windows:/mnt/c/Users/osoto/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/osoto/AppData/Roaming/nvm:/mnt/c/Program Files/nodejs:/snap/bin"
