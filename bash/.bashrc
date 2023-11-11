@@ -1,6 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# Bash Settings for Non-login Shells
 
 # If not running interactively, don't do anything
 case $- in
@@ -24,17 +22,10 @@ shopt -s histappend    # append to the history file
 LESSHISTFILE="$HOME/.cache/lesshst"
 
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
+# Allow dynamic window resize
 shopt -s checkwinsize
 
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
-
-# make less more friendly for non-text input files, see lesspipe(1)
+# Make less more friendly for non-text input files
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 
@@ -57,9 +48,6 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
 	color_prompt=yes
     else
 	color_prompt=
@@ -87,7 +75,6 @@ esac
 # Enable color for ls and grep
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
 
@@ -132,26 +119,27 @@ source /usr/share/doc/fzf/examples/key-bindings.bash
 
 
 # Alias definitions.
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -CF'
+alias ls='ls -la --color=auto'
+alias mv='mv -i'
+alias mkdir='mkdir -p'
+alias cp='cp -i'
 alias vim='nvim'
-
+alias nano='nano -lx'
 
 # Keybindings
-bind 'TAB:menu-complete'
-bind '"\e[Z":menu-complete-backward'
+bind 'TAB:menu-complete' # Tab
+bind '"\e[Z":menu-complete-backward' # Shift tab
 
-bind '"\e[A":history-search-backward'
-bind '"\e[B":history-search-forward'
+bind '"\e[A":history-search-backward' # Up arrow
+bind '"\e[B":history-search-forward' # Down arrow
 
-bind '"\e[1;5C":forward-word'
-bind '"\e[1;5D":backward-word'
+bind '"\e[1;5C":forward-word' # Ctrl right arrow
+bind '"\e[1;5D":backward-word' # Ctrl left arrow
 
-bind -x '"\C-f":"tmux-sessionizer"'
+bind -x '"\C-f":"tmux-sessionizer"' # Ctrl F
 
 # Starship
-eval "$(starship init bash)"
+# eval "$(starship init bash)"
 
 # Ocaml
 if command -v ocaml &> /dev/null; then
