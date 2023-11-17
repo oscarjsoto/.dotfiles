@@ -107,6 +107,7 @@ alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias cp='cp -i'
 alias vim='nvim'
+alias clip='xclip -sel clip'
 
 
 # ===============================================
