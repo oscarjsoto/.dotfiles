@@ -1,0 +1,17 @@
+total 56
+drwxr-xr-x 12 osoto osoto 4096 Nov 16 23:18 .
+drwxr-x--- 21 osoto osoto 4096 Nov 16 23:01 ..
+drwxr-xr-x  8 osoto osoto 4096 Nov 16 23:15 .git
+-rw-r--r--  1 osoto osoto   27 Oct 27 11:35 .gitignore
+drwxr-xr-x  2 osoto osoto 4096 Nov 11 03:28 bash
+-rwxr-xr-x  1 osoto osoto  181 Nov 11 03:28 debian_install
+drwxr-xr-x  3 osoto osoto 4096 Oct 27 11:35 git
+drwxr-xr-x  3 osoto osoto 4096 Oct 27 11:35 nvim
+drwxr-xr-x  2 osoto osoto 4096 Oct 27 11:35 profile
+drwxr-xr-x  3 osoto osoto 4096 Oct 27 11:35 scripts
+drwxr-xr-x  3 osoto osoto 4096 Oct 27 11:35 starship
+lrwxrwxrwx  1 osoto osoto   32 Oct 27 11:35 sync-dotfiles -> scripts/.local/bin/sync-dotfiles
+drwxr-xr-x  3 osoto osoto 4096 Oct 27 11:35 tmux
+drwxr-xr-x  2 osoto osoto 4096 Nov 11 03:31 vim
+-rw-r--r--  1 osoto osoto    0 Nov 16 23:18 xclip
+drwxr-xr-x  3 osoto osoto 4096 Oct 27 11:35 zsh
