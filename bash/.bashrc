@@ -47,9 +47,26 @@ fi
 
 bind 'set completion-ignore-case on'
 bind 'set show-all-if-ambiguous off'
+shopt -s cdspell # Auto correct typos in cd
 
-# Fzf enabled
-source /usr/share/doc/fzf/examples/key-bindings.bash
+
+# Disable Bell sound
+set bell-style none
+
+# Default editor
+export EDITOR="nano"
+
+# Allow Regex Pattern Matching for files
+shopt -s extglob
+
+
+# ===============================================
+#     Fzf Settings
+# ===============================================
+
+if command -v fzf &> /dev/null; then
+    source /usr/share/doc/fzf/examples/key-bindings.bash
+fi
 
 
 # ===============================================
