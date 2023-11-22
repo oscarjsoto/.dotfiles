@@ -1,5 +1,16 @@
+#!/bin/bash
+
+#  ____           _____ _    _
+# |  _ \   /\    / ____| |  | |
+# | |_) | /  \  | (___ | |__| |
+# |  _ < / /\ \  \___ \|  __  |
+# | |_) / ____ \ ____) | |  | |
+# |____/_/    \_\_____/|_|  |_|
+#
+# For Non-login shells
+
 # ===============================================
-#     Bash Settings for Non-login Shells
+#     General Settings
 # ===============================================
 
 # If not running interactively then do nothing
