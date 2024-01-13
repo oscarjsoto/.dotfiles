@@ -7,7 +7,7 @@
 # | |_) / ____ \ ____) | |  | |
 # |____/_/    \_\_____/|_|  |_|
 #
-# For Non-login shells
+# For Non-Login shells
 
 # ===============================================
 #     General Settings
@@ -36,16 +36,27 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 
 # Enable color command prompts
 if [ -x /usr/bin/dircolors ]; then
-    # Complie Colors
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  # Complie Colors
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
-    # Add Colors
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  # Add Colors
+  alias dir='dir --color=auto'
+  alias vdir='vdir --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
+
+# Disable Bell sound
+set bell-style none
+
+# Default editor
+export EDITOR="nano"
+
+
+# ===============================================
+#     Auto complete
+# ===============================================
 
 # Auto completion
 if ! shopt -oq posix; then
@@ -57,15 +68,11 @@ if ! shopt -oq posix; then
 fi
 
 bind 'set completion-ignore-case on'
-bind 'set show-all-if-ambiguous off'
+bind 'set show-all-if-ambiguous off'    # Turn menu on or off
+bind 'set colored-stats On'
+bind 'set colored-completion-prefix On'
+bind 'set completion-query-items 1000'  # Max Results
 shopt -s cdspell # Auto correct typos in cd
-
-
-# Disable Bell sound
-set bell-style none
-
-# Default editor
-export EDITOR="nano"
 
 # Allow Regex Pattern Matching for files
 shopt -s extglob
@@ -113,13 +120,16 @@ sudo() {
 #     Alias definitions.
 # ===============================================
 
-alias ls='ls -la --color=auto'
+alias ls='ls -hN --color=auto --group-directories-first'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias cp='cp -i'
 alias vim='nvim'
 alias clip='xclip -sel clip'
 
+alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
+alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
+alias todash="sudo chsh $USER -s /bin/dash && echo 'Now log out.'"
 
 # ===============================================
 #     Keybindings
@@ -132,7 +142,7 @@ bind '"\e[B":history-search-forward' # Down arrow
 bind '"\e[1;5C":forward-word' # Ctrl right arrow
 bind '"\e[1;5D":backward-word' # Ctrl left arrow
 bind -x '"\C-f":"tmux-sessionizer"' # Ctrl F
-
+bind -x '"\C-x":"source $HOME/.bashrc && source $HOME/.profile"' # Ctrl X
 
 # ===============================================
 #     Starship Settings

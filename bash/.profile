@@ -30,7 +30,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 #     Ocaml Settings
 # ===============================================
 
-if command -v ocaml &> /dev/null; then
-    eval `opam config env`
-    . "$HOME/.cargo/env"
-fi
+# if command -v ocaml &> /dev/null; then
+#    eval `opam config env`
+#     . "$HOME/.cargo/env"
+# fi
