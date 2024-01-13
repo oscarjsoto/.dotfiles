@@ -81,38 +81,6 @@ sudo() {
 
 
 # ===============================================
-#     Alias definitions.
-# ===============================================
-
-alias ls='ls -hN --color=auto'
-alias mv='mv -i'
-alias mkdir='mkdir -p'
-alias cp='cp -i'
-alias vim='nvim'
-alias clip='xclip -sel clipboard'
-# alias gcc='gcc -ansi -Wall -g -O0 -Wwrite-strings -Wshadow -pedantic-errors -fstack-protector-all -Wextra'
-
-
-# ===============================================
-#     Keybindings
-# ===============================================
-
-# Add fzf keybinds
-if command -v fzf > /dev/null 2> /dev/null ; then
-    source /usr/share/doc/fzf/examples/key-bindings.zsh
-    # source /usr/share/doc/fzf/examples/completion.zsh
-fi
-
-bindkey -s "^f" "tmux-sessionizer^M"
-bindkey "^[OA" up-line-or-beginning-search   # Up   arrow
-bindkey "^[OB" down-line-or-beginning-search # Down arrow
-bindkey "^[[Z" reverse-menu-complete # Shift Tab Reverse
-
-# Quick Reload settings
-# echo ZSHRC Reloaded
-# bindkey -s '^j' "source ~/.config/zsh/.zshrc^M"
-
-# ===============================================
 #    Auto Complete Settings
 # ===============================================
 
@@ -132,6 +100,7 @@ setopt EXTENDED_GLOB        # Needed for file modification glob modifiers with c
 setopt MENU_COMPLETE        # Autoselect the first completion entry.
 unsetopt FLOW_CONTROL       # Disable start/stop characters in shell editor.
 # unsetopt AUTO_LIST          # Hide autocomplete menu
+unsetopt pathdirs
 
 #
 # Match Settings
@@ -192,3 +161,41 @@ zstyle ':completion:*:*:kill:*' insert-ids single
 # Man
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.(^1*)' insert-sections true
+
+
+# ===============================================
+#     Alias definitions.
+# ===============================================
+
+alias ls='ls -hN --color=auto'
+alias mv='mv -i'
+alias mkdir='mkdir -p'
+alias cp='cp -i'
+alias vim='nvim'
+alias clip='xclip -sel clipboard'
+# alias gcc='gcc -ansi -Wall -g -O0 -Wwrite-strings -Wshadow -pedantic-errors -fstack-protector-all -Wextra'
+
+alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
+alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
+alias todash="sudo chsh $USER -s /bin/dash && echo 'Now log out.'"
+
+
+# ===============================================
+#     Keybindings
+# ===============================================
+
+# Add fzf keybinds
+if command -v fzf > /dev/null 2> /dev/null ; then
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
+    # source /usr/share/doc/fzf/examples/completion.zsh
+fi
+
+bindkey -s "^f" "tmux-sessionizer^M"
+bindkey "^[OA" up-line-or-beginning-search   # Up   arrow
+bindkey "^[OB" down-line-or-beginning-search # Down arrow
+bindkey "^[[Z" reverse-menu-complete # Shift Tab Reverse
+
+# Quick Reload settings
+# echo ZSHRC Reloaded
+bindkey -s '^x' "source ~/.config/zsh/.zshrc^M"
+
