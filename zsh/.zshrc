@@ -49,7 +49,7 @@ alias ls='ls --color=auto'
 # History
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.cache/zsh/.zsh_history
+HISTFILE=~/.zsh_history
 setopt APPEND_HISTORY HIST_IGNORE_DUPS
 
 # History partial search | up and down
@@ -74,9 +74,6 @@ sudo() {
   else
     command sudo "$@"
   fi
-
-  # Remove sudo file from home
-  rm ~/.sudo_as_admin_successful
 }
 
 
@@ -85,9 +82,9 @@ sudo() {
 # ===============================================
 
 # Load and initialize the completion system
-mkdir -p "$HOME/.cache/zsh"
+# mkdir -p "$HOME/.cache/zsh"
 autoload -Uz compinit
-compinit -C -d "$HOME/.cache/zsh/zcompdump"
+compinit -C -d "$HOME/.zcompdump"
 
 # Options
 setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
@@ -168,10 +165,16 @@ zstyle ':completion:*:manuals.(^1*)' insert-sections true
 # ===============================================
 
 alias ls='ls -hN --color=auto'
+alias ls='exa --icons'
+alias ll='exa --long --icons'
+alias tree='exa --tree'
+
+alias gh='cd ~/ohome'
+
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias cp='cp -i'
-alias vim='nvim'
+# alias vim='nvim'
 alias clip='xclip -sel clipboard'
 # alias gcc='gcc -ansi -Wall -g -O0 -Wwrite-strings -Wshadow -pedantic-errors -fstack-protector-all -Wextra'
 
@@ -186,8 +189,8 @@ alias todash="sudo chsh $USER -s /bin/dash && echo 'Now log out.'"
 
 # Add fzf keybinds
 if command -v fzf > /dev/null 2> /dev/null ; then
-    source /usr/share/doc/fzf/examples/key-bindings.zsh
-    # source /usr/share/doc/fzf/examples/completion.zsh
+    source /usr/share/fzf/key-bindings.zsh
+    # source /usr/share/fzf/completion.zsh
 fi
 
 bindkey -s "^f" "tmux-sessionizer^M"
@@ -197,5 +200,7 @@ bindkey "^[[Z" reverse-menu-complete # Shift Tab Reverse
 
 # Quick Reload settings
 # echo ZSHRC Reloaded
-bindkey -s '^x' "source ~/.config/zsh/.zshrc^M"
+bindkey -s '^x' "source ~/.zshrc^M"
 
+# NVM for Node.js
+source /usr/share/nvm/init-nvm.sh

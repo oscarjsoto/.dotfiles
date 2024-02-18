@@ -21,7 +21,7 @@ mkdir -p "$HOME/.local/share/nano"
 mkdir -p "$HOME/.cache/bash"
 
 # Bash History Setting
-HISTFILE="$HOME/.cache/bash/bash_history"
+# HISTFILE="$HOME/.cache/bash/bash_history"
 HISTCONTROL=ignoreboth # don't put duplicate lines or lines starting
 HISTSIZE=1000
 HISTFILESIZE=2000
@@ -83,7 +83,7 @@ shopt -s extglob
 # ===============================================
 
 if command -v fzf &> /dev/null; then
-    source /usr/share/doc/fzf/examples/key-bindings.bash
+    source /usr/share/fzf/key-bindings.bash
 fi
 
 
@@ -92,7 +92,7 @@ fi
 # ===============================================
 
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)" # Better non-text input files
-LESSHISTFILE="$HOME/.cache/lesshst"
+# LESSHISTFILE="$HOME/.cache/lesshst"
 
 
 # ===============================================
@@ -110,9 +110,6 @@ sudo() {
   else
     command sudo "$@"
   fi
-
-  # Remove sudo file from home
-  rm ~/.sudo_as_admin_successful
 }
 
 
@@ -120,11 +117,14 @@ sudo() {
 #     Alias definitions.
 # ===============================================
 
-alias ls='ls -hN --color=auto --group-directories-first'
+#alias ls='ls -hN --color=auto --group-directories-first'
+alias ls='exa'
+alias ll='ls -l -g --icons'
+alias tree='exa --tree'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias cp='cp -i'
-alias vim='nvim'
+# alias vim='nvim'
 alias clip='xclip -sel clip'
 
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
