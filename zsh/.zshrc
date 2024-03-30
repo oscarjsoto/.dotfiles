@@ -164,12 +164,15 @@ zstyle ':completion:*:manuals.(^1*)' insert-sections true
 #     Alias definitions.
 # ===============================================
 
-alias ls='ls -hN --color=auto'
+# alias ls='ls -hN --color=auto'
 alias ls='exa --icons'
-alias ll='exa --long --icons'
+alias ll='exa -alhg --icons'
 alias tree='exa --tree'
 
 alias gh='cd ~/ohome'
+
+alias cat='bat -pp'
+alias less='bat --style=plain --paging=always'
 
 alias mv='mv -i'
 alias mkdir='mkdir -p'
@@ -201,6 +204,10 @@ bindkey "^[[Z" reverse-menu-complete # Shift Tab Reverse
 # Quick Reload settings
 # echo ZSHRC Reloaded
 bindkey -s '^x' "source ~/.zshrc^M"
+
+# ===============================================
+#     Miscellaneous
+# ===============================================
 
 # NVM for Node.js
 source /usr/share/nvm/init-nvm.sh
