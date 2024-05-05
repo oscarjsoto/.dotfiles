@@ -127,9 +127,9 @@ alias cp='cp -i'
 # alias vim='nvim'
 alias clip='xclip -sel clip'
 
-alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
-alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
-alias todash="sudo chsh $USER -s /bin/dash && echo 'Now log out.'"
+alias tobash="sudo chsh $USER -s /bin/bash && exec /bin/bash"
+alias tozsh="sudo chsh $USER -s /bin/zsh && exec /bin/zsh"
+alias todash="sudo chsh $USER -s /bin/dash && exec /bin/dash'"
 
 # ===============================================
 #     Keybindings
@@ -161,6 +161,3 @@ if command -v ocaml &> /dev/null; then
     export PATH="/home/osoto/.cargo/bin:/home/osoto/.opam/default/bin:/home/osoto/.local/bin:/home/osoto/.cargo/bin:/home/osoto/.opam/default/bin:/home/osoto/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/xpressmp/bin:/mnt/c/xpressmp/workbench:/mnt/c/Python311/Scripts/:/mnt/c/Python311/:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/MATLAB/R2022b/bin:/mnt/c/Program Files/starship/bin/:/mnt/c/Users/osoto/AppData/Roaming/nvm:/mnt/c/Program Files/nodejs:/mnt/c/texlive/2023/bin/windows:/mnt/c/Users/osoto/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/osoto/AppData/Roaming/nvm:/mnt/c/Program Files/nodejs:/snap/bin"
 fi
 
-# Fix Clipboard
-autocutsel &
-autocutsel -s PRIMARY &
