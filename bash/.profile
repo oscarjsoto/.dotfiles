@@ -14,6 +14,7 @@
 # ===============================================
 
 # If running bash load non-login bash settings
+alias tobash="exec /bin/bash"
 [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
 # Set PATH so it includes user's private bin if it exists

@@ -53,10 +53,10 @@ HISTFILE=~/.zsh_history
 setopt APPEND_HISTORY HIST_IGNORE_DUPS
 
 # History partial search | up and down
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
+# autoload -U up-line-or-beginning-search
+# autoload -U down-line-or-beginning-search
+# zle -N up-line-or-beginning-search
+# zle -N down-line-or-beginning-search
 
 
 # ===============================================
@@ -181,9 +181,37 @@ alias cp='cp -i'
 alias clip='xclip -sel clipboard'
 # alias gcc='gcc -ansi -Wall -g -O0 -Wwrite-strings -Wshadow -pedantic-errors -fstack-protector-all -Wextra'
 
-alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
-alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
-alias todash="sudo chsh $USER -s /bin/dash && echo 'Now log out.'"
+alias tobash="sudo chsh $USER -s /bin/bash && exec /bin/bash"
+alias tozsh="sudo chsh $USER -s /bin/zsh && exec /bin/zsh"
+alias todash="sudo chsh $USER -s /bin/dash && exec /bin/dash"
+
+
+# ===============================================
+#     VIM Mode
+# ===============================================
+
+bindkey -v
+export KEYTIMEOUT=1
+# 
+# zmodload -i zsh/complist
+# bindkey -M menuselect 'h' vi-backward-char
+# bindkey -M menuselect 'k' vi-up-line-or-history
+# bindkey -M menuselect 'l' vi-forward-char
+# bindkey -M menuselect 'j' vi-down-line-or-history
+# bindkey -v '^?' backward-delete-char
+# 
+# # Edit line in vim with ctrl-e:
+# autoload edit-command-line; zle -N edit-command-line
+# bindkey '^e' edit-command-line
+# 
+# # Yank to the system clipboard
+# function vi-yank-xclip {
+#     zle vi-yank
+#    echo "$CUTBUFFER" | xclip -sel clipboard
+# }
+# 
+# zle -N vi-yank-xclip
+# bindkey -M vicmd 'y' vi-yank-xclip
 
 
 # ===============================================
@@ -196,14 +224,14 @@ if command -v fzf > /dev/null 2> /dev/null ; then
     # source /usr/share/fzf/completion.zsh
 fi
 
-bindkey -s "^f" "tmux-sessionizer^M"
-bindkey "^[OA" up-line-or-beginning-search   # Up   arrow
-bindkey "^[OB" down-line-or-beginning-search # Down arrow
-bindkey "^[[Z" reverse-menu-complete # Shift Tab Reverse
+# bindkey -s "^f" "tmux-sessionizer^M"
+# bindkey "^[OA" up-line-or-beginning-search   # Up   arrow
+# bindkey "^[OB" down-line-or-beginning-search # Down arrow
+# bindkey "^[[Z" reverse-menu-complete # Shift Tab Reverse
 
 # Quick Reload settings
 # echo ZSHRC Reloaded
-bindkey -s '^x' "source ~/.zshrc^M"
+# bindkey -s '^x' "source ~/.zshrc^M"
 
 # ===============================================
 #     Miscellaneous
