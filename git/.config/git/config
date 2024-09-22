@@ -1,10 +1,11 @@
 [user]
-	email = oscarjsoto12@gmail.com
 	name = Oscar J Soto
+	email = oscarjsoto12@gmail.com
 [color]
 	ui = auto
 [core]
-	editor = nano
+	editor = vim
+	autocrlf = input
 [init]
 	defaultBranch = main
 [fetch]
