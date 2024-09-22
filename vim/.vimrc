@@ -13,6 +13,9 @@ filetype indent on
 " Turn syntax highlighting on.
 syntax on
 
+" Turn mouse on
+set mouse=a
+
 " Editor Settings "
 set scrolloff=8
 set number
@@ -49,9 +52,21 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
+" Search down into subfolders
+" Provides tab-completion for all file-realated tasks
+set path+=**
+
+command! MakeTags !ctags -R .
+
 
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
+let g:netrw_banner=0        " Disable annoying banner
+" let g:netrw_browse_split=4  " Open in prior window
+" let g:netrw_altv=1          " Open splits to the right
+let g:netrw_liststyle=3     " Tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'

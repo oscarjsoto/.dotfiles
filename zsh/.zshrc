@@ -1,90 +1,71 @@
 #!/bin/zsh
 
-#  ______ _____ _    _
-# |___  // ____| |  | |
-#    / /| (___ | |__| |
-#   / /  \___ \|  __  |
-#  / /__ ____) | |  | |
-# /_____|_____/|_|  |_|
+#                             ______ _____ _    _
+#                            |___  // ____| |  | |
+#                               / /| (___ | |__| |
+#                              / /  \___ \|  __  |
+#                             / /__ ____) | |  | |
+#                            /_____|_____/|_|  |_|
 #
-# For Non-Login Shells
+#                            For Non-Login Shells
 
-# ===============================================
-#     ZAP Plugin manager
-# ===============================================
+# =============================================================================
+#                              ZAP Plugin Manager
+# =============================================================================
 
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "zsh-users/zsh-autosuggestions"
+plug "zsh-users/zsh-completions"
 plug "romkatv/powerlevel10k"
 
 
-# ===============================================
-#     Power 10k Prompt Settings
-# ===============================================
+# =============================================================================
+#                          Power 10k Prompt Settings
+# =============================================================================
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
-# Add terminal color
-export TERM=xterm-256color
 
-
-# ===============================================
-#    General Settings
-# ===============================================
+# =============================================================================
+#                               General Settings
+# =============================================================================
 
 # Ensure system folders
 mkdir -p "$HOME/.local/share/nano"
 mkdir -p "$HOME/.cache/zsh"
+mkdir -p "$HOME/.config"
+mkdir -p "$HOME/.ssh"
 
-## Remove Beep
+## Remove beep sound when making a mistake
 unsetopt BEEP
 
-# Colored ls
-alias ls='ls --color=auto'
-
 # History
-HISTSIZE=10000
-SAVEHIST=10000
-HISTFILE=~/.zsh_history
-setopt APPEND_HISTORY HIST_IGNORE_DUPS
-
-# History partial search | up and down
-# autoload -U up-line-or-beginning-search
-# autoload -U down-line-or-beginning-search
-# zle -N up-line-or-beginning-search
-# zle -N down-line-or-beginning-search
+HISTSIZE=5000000
+SAVEHIST=5000000
+HISTFILE=~/.history
+setopt INC_APPEND_HISTORY   # History file is updated per command
+setopt HIST_IGNORE_DUPS     # Do not record an event twice in a row
+setopt HIST_IGNORE_SPACE    # Do not record an event starting with a space.
+setopt HIST_FIND_NO_DUPS    # Do not display a previously found event.
 
 
-# ===============================================
-#     Nala Settings
-# ===============================================
+# =============================================================================
+#                                     fzf
+# =============================================================================
 
-apt() {
-  command nala "$@"
-}
-
-sudo() {
-  if [ "$1" = "apt" ]; then
-    shift
-    command sudo nala "$@"
-  else
-    command sudo "$@"
-  fi
-}
+if command -v fzf > /dev/null 2> /dev/null ; then
+    source /usr/share/fzf/key-bindings.zsh
+    # source /usr/share/fzf/completion.zsh
+fi
 
 
-# ===============================================
-#    Auto Complete Settings
-# ===============================================
-
-# Load and initialize the completion system
-# mkdir -p "$HOME/.cache/zsh"
-autoload -Uz compinit
-compinit -C -d "$HOME/.zcompdump"
+# =============================================================================
+#                            Auto Complete Settings
+# =============================================================================
 
 # Options
 setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
@@ -99,10 +80,6 @@ unsetopt FLOW_CONTROL       # Disable start/stop characters in shell editor.
 # unsetopt AUTO_LIST          # Hide autocomplete menu
 unsetopt pathdirs
 
-#
-# Match Settings
-#
-
 # Fuzzy match mistyped completions (Errors min 1 to max 7)
 zstyle ':completion:*' completer _expand _complete _match _approximate
 zstyle ':completion:*:match:*' original only
@@ -116,7 +93,6 @@ unsetopt CASE_GLOB
 
 # Use caching to make completion for commands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "$HOME/.cache/zsh/zcompcache"
 
 #
 # Style Settings
@@ -159,15 +135,21 @@ zstyle ':completion:*:*:kill:*' insert-ids single
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.(^1*)' insert-sections true
 
+# Load and initialize the completion system
+autoload -Uz compinit bashcompinit
+compinit
+bashcompinit
 
-# ===============================================
-#     Alias definitions.
-# ===============================================
 
-# alias ls='ls -hN --color=auto'
-alias ls='exa --icons'
-alias ll='exa -alhg --icons'
+# =============================================================================
+#                              Alias definitions
+# =============================================================================
+
+alias ls='exa --icons --group-directories-first'
+alias ll='exa -alhg --icons --group-directories-first'
 alias tree='exa --tree'
+
+alias pull_history='fc -RI'
 
 alias gh='cd ~/ohome'
 
@@ -177,65 +159,107 @@ alias less='bat --style=plain --paging=always'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias cp='cp -i'
-# alias vim='nvim'
 alias clip='xclip -sel clipboard'
-# alias gcc='gcc -ansi -Wall -g -O0 -Wwrite-strings -Wshadow -pedantic-errors -fstack-protector-all -Wextra'
 
 alias tobash="sudo chsh $USER -s /bin/bash && exec /bin/bash"
 alias tozsh="sudo chsh $USER -s /bin/zsh && exec /bin/zsh"
 alias todash="sudo chsh $USER -s /bin/dash && exec /bin/dash"
 
 
-# ===============================================
-#     VIM Mode
-# ===============================================
+# =============================================================================
+#                                   VIM Mode
+# =============================================================================
 
-bindkey -v
-export KEYTIMEOUT=1
-# 
+# bindkey -v
+# export KEYTIMEOUT=1
+
 # zmodload -i zsh/complist
-# bindkey -M menuselect 'h' vi-backward-char
+# indkey -M menuselect 'h' vi-backward-char
 # bindkey -M menuselect 'k' vi-up-line-or-history
 # bindkey -M menuselect 'l' vi-forward-char
 # bindkey -M menuselect 'j' vi-down-line-or-history
 # bindkey -v '^?' backward-delete-char
-# 
+# bindkey '^h' backward-delete-char
+
+# ctrl-w removed word backwards
+# bindkey '^w' backward-kill-word
+#
 # # Edit line in vim with ctrl-e:
 # autoload edit-command-line; zle -N edit-command-line
 # bindkey '^e' edit-command-line
-# 
-# # Yank to the system clipboard
+
+# Yank to the system clipboard
 # function vi-yank-xclip {
 #     zle vi-yank
 #    echo "$CUTBUFFER" | xclip -sel clipboard
 # }
-# 
 # zle -N vi-yank-xclip
 # bindkey -M vicmd 'y' vi-yank-xclip
+#
+# # Change cursor shape for different vi modes.
+# function zle-keymap-select {
+#   if [[ ${KEYMAP} == vicmd ]] ||
+#      [[ $1 = 'block' ]]; then
+#     echo -ne '\e[1 q'
+#   elif [[ ${KEYMAP} == main ]] ||
+#        [[ ${KEYMAP} == viins ]] ||
+#        [[ ${KEYMAP} = '' ]] ||
+#        [[ $1 = 'beam' ]]; then
+#     echo -ne '\e[5 q'
+#   fi
+# }
+# zle -N zle-keymap-select
+# zle-line-init() {
+#     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+#     echo -ne "\e[5 q"
+# }
+# zle -N zle-line-init
+# echo -ne '\e[5 q' # Use beam shape cursor on startup.
+# preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 
-# ===============================================
-#     Keybindings
-# ===============================================
+# =============================================================================
+#                                 Keybindings
+# =============================================================================
 
-# Add fzf keybinds
-if command -v fzf > /dev/null 2> /dev/null ; then
-    source /usr/share/fzf/key-bindings.zsh
-    # source /usr/share/fzf/completion.zsh
-fi
+# NOTE: Find keybinding using cat
 
-# bindkey -s "^f" "tmux-sessionizer^M"
-# bindkey "^[OA" up-line-or-beginning-search   # Up   arrow
-# bindkey "^[OB" down-line-or-beginning-search # Down arrow
-# bindkey "^[[Z" reverse-menu-complete # Shift Tab Reverse
+# Disable vim bindings (Since Editor is set to vim)
+bindkey -e
 
-# Quick Reload settings
-# echo ZSHRC Reloaded
+# Fix keybinding
+# bindkey "^[[H" beginning-of-line # ctrl-a
+# bindkey "^[[F" end-of-line       # ctrl-e
+# bindkey "^[[3~" delete-char      # ctrl-d
+
+# Autosugest settings
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey '^y' autosuggest-accept
+
+bindkey "^[[Z" reverse-menu-complete # Shift Tab Reverse
+
+# Quick reload
 # bindkey -s '^x' "source ~/.zshrc^M"
 
-# ===============================================
-#     Miscellaneous
-# ===============================================
 
-# NVM for Node.js
-source /usr/share/nvm/init-nvm.sh
+# =============================================================================
+#                             Syntax Highlighting
+# =============================================================================
+
+if [ -d "$ZAP_DIR/plugins/zsh-syntax-highlighting" ]; then 
+    source "$ZAP_DIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+
+
+# =============================================================================
+#                                     TMUX
+# =============================================================================
+
+# if [[ -z "$TMUX" ]]; then
+#     tmux attach || tmux new-session -c ~/ohome
+# fi
+
+# bindkey -s "^f" "tmux-sessionizer^M"
+
+
