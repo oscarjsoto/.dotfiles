@@ -1,0 +1,2 @@
+#!/bin/sh
+backlight_control +10

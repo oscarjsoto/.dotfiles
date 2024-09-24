@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for file in *\ *; do mv "$file" "${file// /_}"; done;
+rename -v -a _-_ _ *
+rename -v -a , _ *
+rename -v -a __ _ *
+rename -v -a - _ *
+for file in *; do sudo mv "$file" "$(echo "$file" | tr 'A-Z' 'a-z')"; done

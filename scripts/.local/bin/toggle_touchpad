@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Find the ID of the touchpad device
+DEVICE_ID=$(xinput list | grep -i "Touchpad" | sed 's/.*id=\([0-9]\+\).*/\1/')
+
+# Check if the touchpad is currently enabled or disabled
+TOUCHPAD_ENABLED=$(xinput list-props $DEVICE_ID | grep "Device Enabled" | awk '{print $4}')
+
+# Toggle the touchpad state
+if [ $TOUCHPAD_ENABLED -eq 1 ]; then
+    xinput disable $DEVICE_ID
+else
+    xinput enable $DEVICE_ID
+fi

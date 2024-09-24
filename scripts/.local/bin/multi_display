@@ -1,0 +1,11 @@
+#!/bin/sh
+
+
+output=$(xrandr | grep -w "connected" | awk '{print $1}')
+right=$(echo "$output" | sed -n '2p')
+left=$(echo "$output" | sed -n '3p')
+dwmpid=$(ps -e | grep 'dwm' | awk '{print $1}')
+
+
+xrandr --output $left --mode 2560x1440 --primary --output $right --mode 2560x1440 --right-of $left --output eDP-1 --off
+kill -HUP $dwmpid
