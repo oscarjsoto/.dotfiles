@@ -20,6 +20,7 @@ alias tobash="exec /bin/bash"
 # Set PATH so it includes user's private bin if it exists
 [ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
+[ -d "$HOME/.local/app" ] && PATH="$HOME/.local/app:$PATH"
 
 # Add XDG Base Directory Specification Settings
 export XDG_CONFIG_HOME="$HOME/.config"
